@@ -27,6 +27,9 @@ class Note(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return self.title
@@ -36,3 +39,6 @@ class Note(models.Model):
             max_slug_length = self._meta.get_field('slug').max_length
             self.slug = slugify(self.title)[:max_slug_length]
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-created_at']
