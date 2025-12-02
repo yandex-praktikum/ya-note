@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
+from yanote import settings
 from .forms import NoteForm
 from .models import Note
 
@@ -52,6 +53,12 @@ class NoteDelete(NoteBase, generic.DeleteView):
 class NotesList(NoteBase, generic.ListView):
     """Список всех заметок пользователя."""
     template_name = 'notes/list.html'
+    context_object_name = 'notes_feed'
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('-created_at')[
+               :settings.NOTES_COUNT_ON_HOME_PAGE
+               ]
 
 
 class NoteDetail(NoteBase, generic.DetailView):
