@@ -72,7 +72,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Europe/Belgrade'
 
 USE_I18N = True
 
@@ -87,3 +87,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = reverse_lazy('users:login')
 LOGIN_REDIRECT_URL = reverse_lazy('notes:home')
+
+NOTES_COUNT_ON_HOME_PAGE = 10
